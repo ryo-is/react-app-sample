@@ -1,51 +1,6 @@
 import React from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import withProps from "recompose/withProps";
-
-const topPage = () => {
-  return (
-    <div>
-      <h1>Top Page</h1>
-      <p>ここがトップページです</p>
-    </div>
-  );
-};
-
-const page1 = () => {
-  return (
-    <div>
-      <h1>Page1</h1>
-      <p>1枚目のページです</p>
-    </div>
-  );
-};
-
-const page2 = () => {
-  return (
-    <div>
-      <h1>Page2</h1>
-      <p>2枚目のページです</p>
-    </div>
-  );
-};
-
-const page3 = () => {
-  return (
-    <div>
-      <h1>Page3</h1>
-      <p>3枚目のページです</p>
-    </div>
-  );
-};
-
-const page404 = () => {
-  return (
-    <div>
-      <h1>404</h1>
-      <p>存在しないページです</p>
-    </div>
-  );
-}
 
 const pageComponent = props => {
   return (
@@ -77,10 +32,18 @@ const Menu = () => {
             <Route path="/" exact component={withProps(() => ({
                title: "Top page", text: "ここがトップページです"
             }))(pageComponent)} />
-            <Route path="/page1" exact component={page1} />
-            <Route path="/page2" exact component={page2} />
-            <Route path="/page3" exact component={page3} />
-            <Route exact component={page404} />
+            <Route path="/page1" exact component={withProps(() => ({
+               title: "Page1", text: "1枚目のページです"
+            }))(pageComponent)} />
+            <Route path="/page2" exact component={withProps(() => ({
+               title: "Page2", text: "2枚目のページです"
+            }))(pageComponent)} />
+            <Route path="/page3" exact component={withProps(() => ({
+               title: "Page3", text: "3枚目のページです"
+            }))(pageComponent)} />
+            <Route exact component={withProps(() => ({
+               title: "404", text: "存在しないページです"
+            }))(pageComponent)} />
           </Switch>
         </div>
       </div>
