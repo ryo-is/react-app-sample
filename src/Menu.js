@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import withProps from "recompose/withProps";
 
 const topPage = () => {
   return (
@@ -46,6 +47,15 @@ const page404 = () => {
   );
 }
 
+const pageComponent = props => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <p>{props.text}</p>
+    </div>
+  );
+}
+
 const Menu = () => {
   const liStyle = {
     display: "inline",
@@ -64,7 +74,9 @@ const Menu = () => {
 
         <div style={{marginLeft: "50px"}}>
           <Switch>
-            <Route path="/" exact component={topPage} />
+            <Route path="/" exact component={withProps(() => ({
+               title: "Top page", text: "ここがトップページです"
+            }))(pageComponent)} />
             <Route path="/page1" exact component={page1} />
             <Route path="/page2" exact component={page2} />
             <Route path="/page3" exact component={page3} />
